@@ -8,13 +8,12 @@ import java.util.*;
 
 public class MeritBank 
 {
-	private static final String FILE_NAME = "src/test/testMeritBank_testing";
-	private static CDOffering[] listOfCDOffers =  new CDOffering[5];
+	// private static final String FILE_NAME = "src/test/testMeritBank_testing";
+	private static CDOffering[] listOfCDOffers;
 	private static AccountHolder[] listOfAccountHolders = new AccountHolder[10];
 	private static long nextAccountNumber = 0;
 	protected static BufferedReader br;
-	protected static BufferedWriter bw;
-	protected static LinkedList<String> accountInfo;
+	protected static ArrayList<String> accountInfo;
 	
 	static void addAccountHolder(AccountHolder accountHolder)
 	{
@@ -101,32 +100,38 @@ public class MeritBank
 	{
 		try 
 		{
-			br = new BufferedReader(new FileReader(accountData));
-			bw = new BufferedWriter(new FileWriter(accountData));	
-			accountInfo = new LinkedList<>();
+			br = new BufferedReader(new FileReader(accountData));						// instantiate new BReader
+			accountInfo = new ArrayList<>();											// instantiate new LList
 			while(true)
 			{
-				String line = br.readLine();
-				if(line == null) break;
-				
-				String nextAcctNum = String.valueOf(nextAccountNumber);
-				bw.write(nextAcctNum);
-				accountInfo.addFirst(nextAcctNum);
-				System.out.println(line);				
+				String line = br.readLine();											// loop and read/add lines to ArrList
+				if(line == null) break;													// if no more lines, break loop
+				accountInfo.add(line);							
 			}
-			System.out.println(accountInfo);
+			// System.out.println(accountInfo);											// PRINT LIST
+			
+			// --- gets first line as next accnt num --- //
+			String nextAccountNumAsStr = accountInfo.get(0);							// get first line of file, will be nextAcnt num
+			nextAccountNumber = Integer.parseInt(nextAccountNumAsStr);					// set nextAcctNum, parse line 1 from List and set to accnt num
+			
+			// --- gets 2nd line as num of cd offers --- //
+			int getNumOfCDOffers = Integer.parseInt(accountInfo.get(1));
+			// System.out.println(getNumOfCDOffers);
+			CDOffering[] newListOfCDOffers = new CDOffering[getNumOfCDOffers];
+			setCDOfferings(newListOfCDOffers);
+			// System.out.println(line);				
+			// System.out.println(accountInfo);
+			
 			br.close();
-			bw.close();
 		}catch(Exception e)
 		{
 			e.printStackTrace();
-		}
-		// return string/file after data has been updated
+		}		
 		return null;
 	}
 	
 	String writeToString()
-	{		
+	{	
 		return null;
 	}
 	

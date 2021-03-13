@@ -7,9 +7,38 @@ public class MeritAmericaBankApp {
 	{
 		// MeritBank.readFromFile("src/test/testMeritBank_good.txt");
 				
-		MeritBank.readFromFile("src/test/testMeritBank_testing");
-			
+		MeritBank.readFromFile("src/test/testMeritBank_testing");									// read file
+		System.out.println(MeritBank.getNextAccountNumber());										// prints next AcctNum		
+		System.out.println(MeritBank.getCDOfferings().length);										// prints # of CD Offers
 		
+		// add CD Offer 1, term, intRate
+		// add CD Offer 2
+		// add CD Offer 3
+		// add 2 account holders
+		// lastName, mid, first, SSN of ah1
+		// AH1 has 1 checking
+		// checking account #1, balance, intRate, openDate
+		// AH1 has 2 savings
+		// savings account #2, bal, intRate, openDate
+		// savings account #3, bal, intRate, openDate
+		// 0 cd accounts
+		// lastname, mid, first, SSN of AH2
+		// AH2 has 2 checking
+		// checking account #4
+		// checking account #5
+		// AH2 has 3 savings
+		// savings #6
+		// savings #7
+		// savings #8
+		// AH2 has 2 CD accounts
+		// CD account #9, open bal, int rate, term, open date
+		// CD account #10
+		
+		// after reading file, list AH's in ascending order based on total balances
+		
+		
+		// -------- WEEK 3 TESTS --------- //
+		/*
 		CDOffering[] cdOfferings = new CDOffering[5];												// add 5 CD Offerings
 		cdOfferings[0] = new CDOffering(1, 1.8);
 		cdOfferings[1] = new CDOffering(2, 1.9);
@@ -45,7 +74,7 @@ public class MeritAmericaBankApp {
 		ah3.addSavingsAccount(10000);
 		MeritBank.addAccountHolder(ah3);															// add AH3 to list of account holders 
 		MeritBank.totalBalances();																	// get total bal of all account holders
-		
+		*/
 	}
 	
 }

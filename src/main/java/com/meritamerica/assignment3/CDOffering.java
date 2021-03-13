@@ -19,11 +19,12 @@ public class CDOffering
 	
 	double getInterestRate(){return interestRate;}
 	
-	static SavingsAccount readFromString(String accountHolderData) throws ParseException
+	static CDOffering readFromString(String accountHolderData) throws ParseException
 	{
 		try
 		{
 			br = new BufferedReader(new FileReader(accountHolderData));
+			// once br hits index 2, being reading next index until reaches num of CD Accounts
 		}catch(Exception e)
 		{
 			e.printStackTrace();

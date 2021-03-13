@@ -15,6 +15,7 @@ public class AccountHolder implements Comparable<AccountHolder>
 	/*INSTANCE VARIABLES*/
 	
 	private static final double BALANCE_LIMIT = 250000;
+	private static int balance;
 	private String firstName;
 	private String middleName;
 	private String lastName;
@@ -245,8 +246,7 @@ public class AccountHolder implements Comparable<AccountHolder>
 	
 	@Override
 	public int compareTo(AccountHolder obj) {
-		// TODO Auto-generated method stub
-		// account holders should be compared and sorted here
-		return 0;
+		int compareBalance = (int)obj.getCombinedBalance();
+		return this.balance = compareBalance;
 	}
 }
