@@ -231,17 +231,23 @@ public class AccountHolder implements Comparable<AccountHolder>
 		}
 		return sum;
 	}
-	
+	// ------------------------------------------------ FINISH ------------------------------------------------------------------//
 	static AccountHolder readFromString(String accountHolderData) throws ParseException
 	{
+		String tempFirstName = "", tempMidName = "", TempLastName = "", tempSSN = "";
+		String[] tempArr = accountHolderData.split(",");
 		try
 		{
-			
+			 /* "Doe,,John,1234567890" */
+			 tempFirstName = tempArr[0];
+			 tempMidName = tempArr[1];
+			 TempLastName = tempArr[2];
+			 tempSSN = tempArr[3];
 		}catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		return null;
+		return new AccountHolder(tempFirstName, tempMidName, TempLastName, tempSSN);
 	}
 	
 	@Override

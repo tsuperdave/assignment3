@@ -7,7 +7,6 @@ public class CDOffering
 {
 	private int term;
 	private double interestRate;
-	protected static BufferedReader br;
 	
 	CDOffering(int term, double interestRate)
 	{
@@ -19,10 +18,11 @@ public class CDOffering
 	
 	double getInterestRate(){return interestRate;}
 	
+	// ------------------------------------------------ FINISH ------------------------------------------------------------------//
 	static CDOffering readFromString(String accountHolderData) throws ParseException
 	{
-		int tempTerm;
-		int tempIntRate;
+		int tempTerm = 0;
+		int tempIntRate = 0;
 		try
 		{
 			/* "1,0.018" */ 
@@ -34,12 +34,14 @@ public class CDOffering
 		{
 			e.printStackTrace();
 		}
+		// need to add to list of new CD Offers, then return to MeritBank as string?
 		return new CDOffering(tempTerm, tempIntRate);
 	}
 	
 	String writeToString()
 	{
-		return null;
+		String tempTerm = String.valueOf(term), tempIntRate = String.valueOf(interestRate);
+		return tempTerm + "," + tempIntRate;
 	}
 
 }

@@ -12,23 +12,19 @@ public class BankAccount
 	protected long accountNumber;
 	protected double balance;
 	protected double interestRate;
-
 	
 	BankAccount(double balance, double interestRate)
 	{
-		this.balance = balance;
-		this.interestRate = interestRate;
+		this(MeritBank.getNextAccountNumber(), balance, interestRate, new java.util.Date());	
 	}
 	
 	BankAccount(double balance, double interestRate, java.util.Date accountOpenedOn)
 	{
-		this.balance = balance;
-		this.interestRate = interestRate;
-		this.accountOpenedOn = accountOpenedOn;
+		this(MeritBank.getNextAccountNumber(), balance, interestRate, accountOpenedOn);
 	}
 	
-	BankAccount(long accountNumber, double balance, double interestRate, java.util.Date accountOpenedOn)
-	{
+	protected BankAccount(long accountNumber, double balance, double interestRate, java.util.Date accountOpenedOn)
+	{		
 		this.accountNumber = accountNumber;
 		this.balance = balance;
 		this.interestRate = interestRate;

@@ -12,9 +12,7 @@ public class MeritBank
 	private static CDOffering[] listOfCDOffers;
 	private static AccountHolder[] listOfAccountHolders;
 	private static long nextAccountNumber = 0;
-	protected static Scanner sc;
-	protected static BufferedWriter bw;
-	
+		
 	static void addAccountHolder(AccountHolder accountHolder)
 	{
 		for(int i = 0; i < listOfAccountHolders.length; i++)
@@ -98,9 +96,8 @@ public class MeritBank
 	// ------------------------------------------------ FINISH ------------------------------------------------------------------//
 	static BankAccount readFromFile(String accountData) throws ParseException
 	{		
-		try 
-		{
-			sc = new Scanner(new FileReader(accountData));											// get next acct num										 
+		try(Scanner sc = new Scanner(new FileReader(accountData));)
+		{																																	 
 			setNextAccountNumber(Long.parseLong(sc.next()));										// store next acct num
 			// -- CD OFFERS -- //
 			CDOffering[] newCDarr = new CDOffering[sc.nextInt()];									// set 3 cd offers
@@ -118,22 +115,21 @@ public class MeritBank
 				int numOfCheckAccts = sc.nextInt();													// store num of checking accounts
 					for(int j = 0; j < numOfCheckAccts; j++)	
 					{
-						tempAcct.addCheckingAccount(CheckingAccount.readFromString(sc.next()));					
+						tempAcct.addCheckingAccount(CheckingAccount.readFromString(sc.next()));		// read from str and add obj to Acct Holder			
 					}
 				int numOfSavAccts = sc.nextInt();
 					for(int j = 0; j < numOfSavAccts; j++)
 					{
-						tempAcct.addSavingsAccount(SavingsAccount.readFromString(sc.next()));
+						tempAcct.addSavingsAccount(SavingsAccount.readFromString(sc.next()));		// read from str and add obj to Acct Holder
 					}
 				int numOfCDAccts = sc.nextInt();
 					for(int j = 0; j < numOfCDAccts; j++)
 					{
-						tempAcct.addCDAccount(CDAccount.readFromString(sc.next()));
+						tempAcct.addCDAccount(CDAccount.readFromString(sc.next()));					// read from str and add obj to Acct Holder
 					}
 					
-				listOfAccountHolders[i] = tempAcct;
-			}	
-			sc.close();
+				listOfAccountHolders[i] = tempAcct;													// create new Acct Holder list Array with new values
+			}				
 		}catch(Exception e)
 		{
 			e.printStackTrace();
@@ -141,12 +137,67 @@ public class MeritBank
 		return null;
 	}
 	
-	String writeToString()
+	String writeToFile()
 	{	
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter("src/test/testMeritBank_testing")))
+		{
+			bw.write(String.valueOf(nextAccountNumber)); bw.newLine();						// next acct num
+			
+			bw.write(String.valueOf(listOfCDOffers.length)); bw.newLine();					// num of CD Offers
+				for(int i = 0; i < listOfCDOffers.length; i++)
+				{
+					bw.write(listOfCDOffers[i].writeToString()); bw.newLine();				// list CD offers
+				}
+			 /* NEED TO SORT ACCOUNT HOLDERS BY BALANCE BEFOPRE WRITING TO FILE */
+			bw.write(String.valueOf(listOfAccountHolders.length)); bw.newLine();			// num of account holders
+			AccountHolder[] newAcctList = sortAccountHolders();								// sort account holders then iterate over new array
+			// need new array to store vals to
+				for(int i = 0; i < newAcctList.length; i++) 
+				{
+					// may need to sortAccountHolders() before writing string
+					
+					bw.write(newAcctList[i].getLastName() + "," +
+							newAcctList[i].getMiddleName() + "," +
+							newAcctList[i].getFirstName() + "," +
+							newAcctList[i].getSSN()
+							); bw.newLine();
+					
+					bw.write(String.valueOf(newAcctList[i].getNumberOfCheckingAccounts())); bw.newLine();
+						for(int j = 0; j < newAcctList[i].getNumberOfCheckingAccounts(); i++)
+						{
+							bw.write(listOfAccountHolders[i].); bw.newLine(); //do something
+						}
+					bw.write(String.valueOf(newAcctList[i].getNumberOfSavingsAccounts())); bw.newLine();
+						for(int j = 0; j < listOfAccountHolders[i].getNumberOfCheckingAccounts(); i++)
+						{
+							bw.write(listOfAccountHolders[i].); bw.newLine(); //do something
+						}
+					bw.write(String.valueOf(newAcctList[i].getNumberOfCDAccounts())); bw.newLine();
+						for(int j = 0; j < listOfAccountHolders[i].getNumberOfCheckingAccounts(); i++)
+						{
+							bw.write(listOfAccountHolders[i].); bw.newLine(); //do something
+						}
+				}															
+		}		
+		catch(IOException e) 
+		{
+			System.out.println("File not found"); 
+		}
+		
+		// write all in same manner exception with account holders sorted by balance
+		
+		// next act
+		// # of cd offers
+		// 
+		
 		return null;
 	}
 	
-	static AccountHolder[] sortAccountHolders(){return null;}
+	static AccountHolder[] sortAccountHolders()
+	{		
+		// create tempArr to sort current array from
+		return tempArr;										// send objects to 'compareTo()', then add to new arr?
+	}
 	
 	private static void setNextAccountNumber(long nextAccountNumber){MeritBank.nextAccountNumber = nextAccountNumber;}
 
