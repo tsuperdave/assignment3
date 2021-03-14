@@ -249,6 +249,39 @@ public class AccountHolder implements Comparable<AccountHolder>
 		return new AccountHolder(tempFirstName, tempMidName, TempLastName, tempSSN);
 	}
 	
+	String writeToString()
+	{	
+		// Store num of accounts as str to concat into result
+		int tempNumOfChk = this.getNumberOfCheckingAccounts(),
+				   tempNumOFSav = this.getNumberOfSavingsAccounts(),
+				   tempNumOfCDs = this.getNumberOfCDAccounts();
+		// resulting string to add to
+		String result = getLastName() + "," + getMiddleName() + "," + getFirstName() + "," + getSSN() + "\n" +
+						tempNumOfChk + "\n";
+						
+		// loop over checking accounts, run writeToString to return data from class
+		for(int i = 0; i < tempNumOfChk; i++)
+		{
+			result += this.checkingAccountList[i].writeToString() + "\n";
+		}
+		result += tempNumOFSav + "\n";
+		
+		// loop over savings accounts, run writeToString to return data from class
+		for(int i = 0; i < tempNumOFSav; i++)
+		{
+			result += this.savingsAccountList[i].writeToString() + "\n";
+		}
+		result += tempNumOfCDs + "\n";
+		
+		// loop over cd accounts, run writeToString to return data from class
+		for(int i = 0; i < tempNumOFSav; i++)
+		{
+			result += this.cdAccountList[i].writeToString() + "\n";
+		}
+		
+		return result;
+	}
+	
 	@Override
 	public int compareTo(AccountHolder obj) {
 		if(this.getCombinedBalance() > obj.getCombinedBalance()) return 1;

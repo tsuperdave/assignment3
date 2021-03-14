@@ -21,12 +21,12 @@ public class CDOffering
 	static CDOffering readFromString(String accountHolderData) throws ParseException
 	{
 		int tempTerm = 0;
-		int tempIntRate = 0;
+		double tempIntRate = 0;
 		try
 		{ 
 			int comma = accountHolderData.indexOf(",");
 			tempTerm = Integer.parseInt(accountHolderData.substring(0, comma));
-			tempIntRate = Integer.parseInt(accountHolderData.substring(comma, accountHolderData.length()));
+			tempIntRate = Double.parseDouble(accountHolderData.substring(comma + 1, accountHolderData.length()));
 			
 		}catch(Exception e)
 		{
@@ -36,9 +36,8 @@ public class CDOffering
 	}
 	
 	String writeToString()
-	{
-		String tempTerm = String.valueOf(term), tempIntRate = String.valueOf(interestRate);		
-		return tempTerm + "," + tempIntRate;
+	{	
+		return String.valueOf(this.term) + "," + String.valueOf(this.interestRate);
 	}
 
 }

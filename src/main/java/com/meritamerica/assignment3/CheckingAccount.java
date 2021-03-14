@@ -29,7 +29,7 @@ public class CheckingAccount extends BankAccount
 			tempAcctNum = Long.parseLong(tempArr[0]);
 			tempBal = Double.parseDouble(tempArr[1]);
 			tempIntRate = Double.parseDouble(tempArr[2]);
-			tempOpenDate = new java.util.Date(tempArr[4]);
+			tempOpenDate = new java.util.Date(tempArr[3]);
 					
 		}catch(Exception e)
 		{

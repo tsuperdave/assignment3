@@ -94,10 +94,11 @@ public class MeritBank
 	}
 	
 	// ------------------------------------------------ FINISH ------------------------------------------------------------------//
-	static BankAccount readFromFile(String accountData) throws ParseException
+	static boolean readFromFile(String accountData) throws ParseException
 	{		
-		try(Scanner sc = new Scanner(new FileReader(accountData));)
-		{																																	 
+		try(Scanner sc = new Scanner(new FileReader(accountData)))
+		{	
+			
 			setNextAccountNumber(Long.parseLong(sc.next()));										// store next acct num
 			// -- CD OFFERS -- //
 			CDOffering[] newCDarr = new CDOffering[sc.nextInt()];									// set 3 cd offers
@@ -107,7 +108,7 @@ public class MeritBank
 			}
 			setCDOfferings(newCDarr);
 			
-			int newNumOfAcctHolder = sc.nextInt();													// set new num of acct holders
+			int newNumOfAcctHolder = Integer.parseInt(sc.next());													// set new num of acct holders
 			// -- GET ACCT HOLDER INFO AND ADD --//
 			for(int i = 0; i < newNumOfAcctHolder; i++)
 			{
@@ -134,12 +135,12 @@ public class MeritBank
 		{
 			e.printStackTrace();
 		}		
-		return null;
+		return true;
 	}
 	
-	String writeToFile()
+	static boolean writeToFile(String fileName)
 	{	
-		try(BufferedWriter bw = new BufferedWriter(new FileWriter("src/test/testMeritBank_testing")))
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(fileName)))
 		{
 			bw.write(String.valueOf(nextAccountNumber)); bw.newLine();						// next acct num
 			
@@ -150,37 +151,17 @@ public class MeritBank
 				}
 				
 			bw.write(String.valueOf(listOfAccountHolders.length)); bw.newLine();			// num of account holders
-			sortAccountHolders();								// sort account holders then iterate over new array
+			sortAccountHolders();															// sort account holders then iterate over new array, write offers out
 				for(int i = 0; i < listOfAccountHolders.length; i++) 
 				{									
-					bw.write(listOfAccountHolders[i].getLastName() + "," +
-							listOfAccountHolders[i].getMiddleName() + "," +
-							listOfAccountHolders[i].getFirstName() + "," +
-							listOfAccountHolders[i].getSSN()
-							); bw.newLine();
-					
-					bw.write(String.valueOf(listOfAccountHolders[i].getNumberOfCheckingAccounts())); bw.newLine();
-						for(int j = 0; j < listOfAccountHolders[i].getNumberOfCheckingAccounts(); i++)
-						{
-							bw.write(); bw.newLine(); //get checking accounts info
-						}
-					bw.write(String.valueOf(listOfAccountHolders[i].getNumberOfSavingsAccounts())); bw.newLine();
-						for(int j = 0; j < listOfAccountHolders[i].getNumberOfSavingsAccounts(); i++)
-						{
-							bw.write(listOfAccountHolders[i].); bw.newLine(); //do something
-						}
-					bw.write(String.valueOf(listOfAccountHolders[i].getNumberOfCDAccounts())); bw.newLine();
-						for(int j = 0; j < listOfAccountHolders[i].getNumberOfCDAccounts(); i++)
-						{
-							bw.write(listOfAccountHolders[i].); bw.newLine(); //do something
-						}
-				}				
+					bw.write(listOfAccountHolders[i].writeToString()); bw.newLine();
+				}			 								
 		}		
 		catch(IOException e) 
 		{
 			System.out.println("File not found"); 
 		}
-		return null; // what to return ?? file?
+		return true; // what to return ?? file?
 	}
 	
 	static AccountHolder[] sortAccountHolders()

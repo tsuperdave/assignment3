@@ -22,11 +22,7 @@ public class CDAccount extends BankAccount
 		super(MeritBank.getNextAccountNumber(), balance, interestRate, accountOpenedOn, term);
 	}
 	
-	
-	int getTerm()
-	{
-		return this.offering.getTerm();
-	}
+	int getTerm(){return this.offering.getTerm();}
 	
 	java.util.Date getStartDate()
 	{
@@ -58,10 +54,10 @@ public class CDAccount extends BankAccount
 	String writeToString()
 	{
 		String tempAcctNum = String.valueOf(MeritBank.getNextAccountNumber()), 
-				tempBal = String.valueOf(balance), 
-				tempIntRate = String.valueOf(offering.getInterestRate()), 
-				tempOpenDate = String.valueOf(startDate),
-				tempTerm = String.valueOf(getTerm());
+				tempBal = String.valueOf(this.balance), 
+				tempIntRate = String.valueOf(this.offering.getInterestRate()), 
+				tempOpenDate = String.valueOf(this.startDate),
+				tempTerm = String.valueOf(this.getTerm());
 		
 		return tempAcctNum + "," +
 		tempBal + "," +

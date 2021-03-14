@@ -8,6 +8,9 @@ public class MeritAmericaBankApp {
 		// MeritBank.readFromFile("src/test/testMeritBank_good.txt");
 				
 		MeritBank.readFromFile("src/test/testMeritBank_testing");
+		
+	
+		MeritBank.writeToFile("src/test/writeTestFile");
 				
 		// -------- WEEK 3 TESTS --------- //
 		/*
