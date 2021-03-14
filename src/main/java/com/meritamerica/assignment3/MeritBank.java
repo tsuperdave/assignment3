@@ -13,6 +13,7 @@ public class MeritBank
 	private static AccountHolder[] listOfAccountHolders = new AccountHolder[10];
 	private static long nextAccountNumber = 0;
 	protected static BufferedReader br;
+	protected static BufferedWriter bw;
 	protected static ArrayList<String> accountInfo;
 	
 	static void addAccountHolder(AccountHolder accountHolder)
@@ -98,6 +99,7 @@ public class MeritBank
 	// ------------------------------------------------ FINISH ------------------------------------------------------------------//
 	static BankAccount readFromFile(String accountData) throws ParseException
 	{
+		listOfAccountHolders = new AccountHolder[10];
 		try 
 		{
 			br = new BufferedReader(new FileReader(accountData));						// instantiate new BReader
@@ -106,7 +108,9 @@ public class MeritBank
 			{
 				String line = br.readLine();											// loop and read/add lines to ArrList
 				if(line == null) break;													// if no more lines, break loop
-				accountInfo.add(line);							
+				
+				accountInfo.add(line);
+						
 			}
 			// System.out.println(accountInfo);											// PRINT LIST
 			
@@ -119,8 +123,13 @@ public class MeritBank
 			// System.out.println(getNumOfCDOffers);
 			CDOffering[] newListOfCDOffers = new CDOffering[getNumOfCDOffers];
 			setCDOfferings(newListOfCDOffers);
+			//---add for loop to add the i num of lines IE getNumOfCDOffers after this line
+			//---add i num of lines to CD Offers array
+			
 			// System.out.println(line);				
 			// System.out.println(accountInfo);
+			
+			// --- //
 			
 			br.close();
 		}catch(Exception e)
@@ -137,6 +146,6 @@ public class MeritBank
 	
 	static AccountHolder[] sortAccountHolders(){return null;}
 	
-	static void setNextAccountNumber(long nextAccountNumber){MeritBank.nextAccountNumber = nextAccountNumber;}
+	private static void setNextAccountNumber(long nextAccountNumber){MeritBank.nextAccountNumber = nextAccountNumber;}
 
 }
