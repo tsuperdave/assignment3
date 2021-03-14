@@ -148,55 +148,45 @@ public class MeritBank
 				{
 					bw.write(listOfCDOffers[i].writeToString()); bw.newLine();				// list CD offers
 				}
-			 /* NEED TO SORT ACCOUNT HOLDERS BY BALANCE BEFOPRE WRITING TO FILE */
+				
 			bw.write(String.valueOf(listOfAccountHolders.length)); bw.newLine();			// num of account holders
-			AccountHolder[] newAcctList = sortAccountHolders();								// sort account holders then iterate over new array
-			// need new array to store vals to
-				for(int i = 0; i < newAcctList.length; i++) 
-				{
-					// may need to sortAccountHolders() before writing string
-					
-					bw.write(newAcctList[i].getLastName() + "," +
-							newAcctList[i].getMiddleName() + "," +
-							newAcctList[i].getFirstName() + "," +
-							newAcctList[i].getSSN()
+			sortAccountHolders();								// sort account holders then iterate over new array
+				for(int i = 0; i < listOfAccountHolders.length; i++) 
+				{									
+					bw.write(listOfAccountHolders[i].getLastName() + "," +
+							listOfAccountHolders[i].getMiddleName() + "," +
+							listOfAccountHolders[i].getFirstName() + "," +
+							listOfAccountHolders[i].getSSN()
 							); bw.newLine();
 					
-					bw.write(String.valueOf(newAcctList[i].getNumberOfCheckingAccounts())); bw.newLine();
-						for(int j = 0; j < newAcctList[i].getNumberOfCheckingAccounts(); i++)
-						{
-							bw.write(listOfAccountHolders[i].); bw.newLine(); //do something
-						}
-					bw.write(String.valueOf(newAcctList[i].getNumberOfSavingsAccounts())); bw.newLine();
+					bw.write(String.valueOf(listOfAccountHolders[i].getNumberOfCheckingAccounts())); bw.newLine();
 						for(int j = 0; j < listOfAccountHolders[i].getNumberOfCheckingAccounts(); i++)
 						{
-							bw.write(listOfAccountHolders[i].); bw.newLine(); //do something
+							bw.write(); bw.newLine(); //get checking accounts info
 						}
-					bw.write(String.valueOf(newAcctList[i].getNumberOfCDAccounts())); bw.newLine();
-						for(int j = 0; j < listOfAccountHolders[i].getNumberOfCheckingAccounts(); i++)
+					bw.write(String.valueOf(listOfAccountHolders[i].getNumberOfSavingsAccounts())); bw.newLine();
+						for(int j = 0; j < listOfAccountHolders[i].getNumberOfSavingsAccounts(); i++)
 						{
 							bw.write(listOfAccountHolders[i].); bw.newLine(); //do something
 						}
-				}															
+					bw.write(String.valueOf(listOfAccountHolders[i].getNumberOfCDAccounts())); bw.newLine();
+						for(int j = 0; j < listOfAccountHolders[i].getNumberOfCDAccounts(); i++)
+						{
+							bw.write(listOfAccountHolders[i].); bw.newLine(); //do something
+						}
+				}				
 		}		
 		catch(IOException e) 
 		{
 			System.out.println("File not found"); 
 		}
-		
-		// write all in same manner exception with account holders sorted by balance
-		
-		// next act
-		// # of cd offers
-		// 
-		
-		return null;
+		return null; // what to return ?? file?
 	}
 	
 	static AccountHolder[] sortAccountHolders()
 	{		
-		// create tempArr to sort current array from
-		return tempArr;										// send objects to 'compareTo()', then add to new arr?
+		Arrays.sort(listOfAccountHolders, Collections.reverseOrder());
+		return listOfAccountHolders;											
 	}
 	
 	private static void setNextAccountNumber(long nextAccountNumber){MeritBank.nextAccountNumber = nextAccountNumber;}

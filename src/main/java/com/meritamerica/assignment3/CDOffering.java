@@ -1,6 +1,5 @@
 package com.meritamerica.assignment3;
 
-import java.io.*;
 import java.text.*;
 
 public class CDOffering 
@@ -24,8 +23,7 @@ public class CDOffering
 		int tempTerm = 0;
 		int tempIntRate = 0;
 		try
-		{
-			/* "1,0.018" */ 
+		{ 
 			int comma = accountHolderData.indexOf(",");
 			tempTerm = Integer.parseInt(accountHolderData.substring(0, comma));
 			tempIntRate = Integer.parseInt(accountHolderData.substring(comma, accountHolderData.length()));
@@ -33,14 +31,13 @@ public class CDOffering
 		}catch(Exception e)
 		{
 			e.printStackTrace();
-		}
-		// need to add to list of new CD Offers, then return to MeritBank as string?
+		}		
 		return new CDOffering(tempTerm, tempIntRate);
 	}
 	
 	String writeToString()
 	{
-		String tempTerm = String.valueOf(term), tempIntRate = String.valueOf(interestRate);
+		String tempTerm = String.valueOf(term), tempIntRate = String.valueOf(interestRate);		
 		return tempTerm + "," + tempIntRate;
 	}
 

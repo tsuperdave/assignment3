@@ -2,6 +2,7 @@ package com.meritamerica.assignment3;
 
 import java.io.*;
 import java.text.*;
+import java.util.Date;
 
 import com.meritamerica.assignment3.MeritBank;
 
@@ -12,6 +13,7 @@ public class BankAccount
 	protected long accountNumber;
 	protected double balance;
 	protected double interestRate;
+	protected double term;
 	
 	BankAccount(double balance, double interestRate)
 	{
@@ -23,12 +25,26 @@ public class BankAccount
 		this(MeritBank.getNextAccountNumber(), balance, interestRate, accountOpenedOn);
 	}
 	
+	BankAccount(double balance, double interestRate, Date accountOpenedOn, double term)
+	{
+		this(MeritBank.getNextAccountNumber(), balance, interestRate, accountOpenedOn, term);
+	}
+	
 	protected BankAccount(long accountNumber, double balance, double interestRate, java.util.Date accountOpenedOn)
 	{		
 		this.accountNumber = accountNumber;
 		this.balance = balance;
 		this.interestRate = interestRate;
 		this.accountOpenedOn = accountOpenedOn;
+	}
+	
+	protected BankAccount(long accountNumber, double balance, double interestRate, java.util.Date accountOpenedOn, double term)
+	{		
+		this.accountNumber = accountNumber;
+		this.balance = balance;
+		this.interestRate = interestRate;
+		this.accountOpenedOn = accountOpenedOn;
+		this.term = term;
 	}
 	
 	long getAccountNumber(){return this.accountNumber;}
@@ -77,6 +93,15 @@ public class BankAccount
 	
 	String writeToString()
 	{
-		return null;
+		String tempAcctNum = String.valueOf(accountNumber), 
+				tempBalance = String.valueOf(balance), 
+				tempIntRate = String.valueOf(interestRate),
+				tempOpenDate = String.valueOf(accountOpenedOn),
+				tempTerm = String.valueOf(term);
+		return tempAcctNum + "," +
+		tempBalance + "," +
+		tempIntRate + "," +
+		tempOpenDate + "," +
+		tempTerm;
 	}
 }
