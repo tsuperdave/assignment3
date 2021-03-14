@@ -232,11 +232,11 @@ public class AccountHolder implements Comparable<AccountHolder>
 		return sum;
 	}
 	
-	static SavingsAccount readFromString(String accountHolderData) throws ParseException
+	static AccountHolder readFromString(String accountHolderData) throws ParseException
 	{
 		try
 		{
-			br = new BufferedReader(new FileReader(accountHolderData));
+			
 		}catch(Exception e)
 		{
 			e.printStackTrace();

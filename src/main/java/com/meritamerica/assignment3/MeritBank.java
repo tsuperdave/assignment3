@@ -10,11 +10,10 @@ public class MeritBank
 {
 	// private static final String FILE_NAME = "src/test/testMeritBank_testing";
 	private static CDOffering[] listOfCDOffers;
-	private static AccountHolder[] listOfAccountHolders = new AccountHolder[10];
+	private static AccountHolder[] listOfAccountHolders;
 	private static long nextAccountNumber = 0;
-	protected static BufferedReader br;
+	protected static Scanner sc;
 	protected static BufferedWriter bw;
-	protected static ArrayList<String> accountInfo;
 	
 	static void addAccountHolder(AccountHolder accountHolder)
 	{
@@ -98,40 +97,43 @@ public class MeritBank
 	
 	// ------------------------------------------------ FINISH ------------------------------------------------------------------//
 	static BankAccount readFromFile(String accountData) throws ParseException
-	{
-		listOfAccountHolders = new AccountHolder[10];
+	{		
 		try 
 		{
-			br = new BufferedReader(new FileReader(accountData));						// instantiate new BReader
-			accountInfo = new ArrayList<>();											// instantiate new LList
-			while(true)
+			sc = new Scanner(new FileReader(accountData));											// get next acct num										 
+			setNextAccountNumber(Long.parseLong(sc.next()));										// store next acct num
+			// -- CD OFFERS -- //
+			CDOffering[] newCDarr = new CDOffering[sc.nextInt()];									// set 3 cd offers
+			for(int i = 0; i < newCDarr.length; i++)
 			{
-				String line = br.readLine();											// loop and read/add lines to ArrList
-				if(line == null) break;													// if no more lines, break loop
-				
-				accountInfo.add(line);
-						
+				newCDarr[i] = CDOffering.readFromString(sc.next());									// send to CDOffer to return 				 
 			}
-			// System.out.println(accountInfo);											// PRINT LIST
+			setCDOfferings(newCDarr);
 			
-			// --- gets first line as next accnt num --- //
-			String nextAccountNumAsStr = accountInfo.get(0);							// get first line of file, will be nextAcnt num
-			nextAccountNumber = Integer.parseInt(nextAccountNumAsStr);					// set nextAcctNum, parse line 1 from List and set to accnt num
-			
-			// --- gets 2nd line as num of cd offers --- //
-			int getNumOfCDOffers = Integer.parseInt(accountInfo.get(1));
-			// System.out.println(getNumOfCDOffers);
-			CDOffering[] newListOfCDOffers = new CDOffering[getNumOfCDOffers];
-			setCDOfferings(newListOfCDOffers);
-			//---add for loop to add the i num of lines IE getNumOfCDOffers after this line
-			//---add i num of lines to CD Offers array
-			
-			// System.out.println(line);				
-			// System.out.println(accountInfo);
-			
-			// --- //
-			
-			br.close();
+			int newNumOfAcctHolder = sc.nextInt();													// set new num of acct holders
+			// -- GET ACCT HOLDER INFO AND ADD --//
+			for(int i = 0; i < newNumOfAcctHolder; i++)
+			{
+				AccountHolder tempAcct = AccountHolder.readFromString(sc.next());					// temp store num of account holders
+				int numOfCheckAccts = sc.nextInt();													// store num of checking accounts
+					for(int j = 0; j < numOfCheckAccts; j++)	
+					{
+						tempAcct.addCheckingAccount(CheckingAccount.readFromString(sc.next()));					
+					}
+				int numOfSavAccts = sc.nextInt();
+					for(int j = 0; j < numOfSavAccts; j++)
+					{
+						tempAcct.addSavingsAccount(SavingsAccount.readFromString(sc.next()));
+					}
+				int numOfCDAccts = sc.nextInt();
+					for(int j = 0; j < numOfCDAccts; j++)
+					{
+						tempAcct.addCDAccount(CDAccount.readFromString(sc.next()));
+					}
+					
+				listOfAccountHolders[i] = tempAcct;
+			}	
+			sc.close();
 		}catch(Exception e)
 		{
 			e.printStackTrace();

@@ -21,15 +21,20 @@ public class CDOffering
 	
 	static CDOffering readFromString(String accountHolderData) throws ParseException
 	{
+		int tempTerm;
+		int tempIntRate;
 		try
 		{
-			br = new BufferedReader(new FileReader(accountHolderData));
-			// once br hits index 2, being reading next index until reaches num of CD Accounts
+			/* "1,0.018" */ 
+			int comma = accountHolderData.indexOf(",");
+			tempTerm = Integer.parseInt(accountHolderData.substring(0, comma));
+			tempIntRate = Integer.parseInt(accountHolderData.substring(comma, accountHolderData.length()));
+			
 		}catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		return null;
+		return new CDOffering(tempTerm, tempIntRate);
 	}
 	
 	String writeToString()

@@ -34,7 +34,7 @@ public class CDAccount extends BankAccount
 	{
 		try
 		{
-			br = new BufferedReader(new FileReader(accountData));
+			
 		}catch(Exception e)
 		{
 			e.printStackTrace();

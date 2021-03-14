@@ -12,7 +12,7 @@ public class BankAccount
 	protected long accountNumber;
 	protected double balance;
 	protected double interestRate;
-	protected static BufferedReader br;
+
 	
 	BankAccount(double balance, double interestRate)
 	{
@@ -71,7 +71,7 @@ public class BankAccount
 	{
 		try 
 		{
-			br = new BufferedReader(new FileReader(new File(accountData)));
+			
 		}catch(Exception e)
 		{
 			e.printStackTrace();
