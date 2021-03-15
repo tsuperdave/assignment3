@@ -17,8 +17,7 @@ public class CDOffering
 	
 	double getInterestRate(){return interestRate;}
 	
-	// ------------------------------------------------ FINISH ------------------------------------------------------------------//
-	static CDOffering readFromString(String accountHolderData) throws ParseException
+	static CDOffering readFromString(String accountHolderData) throws NumberFormatException
 	{
 		int tempTerm = 0;
 		double tempIntRate = 0;

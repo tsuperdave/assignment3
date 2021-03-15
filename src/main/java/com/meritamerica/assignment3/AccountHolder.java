@@ -23,7 +23,6 @@ public class AccountHolder implements Comparable<AccountHolder>
 	private CheckingAccount[] checkingAccountList = new CheckingAccount[10];
 	private SavingsAccount[] savingsAccountList = new SavingsAccount[10];
 	private CDAccount[] cdAccountList = new CDAccount[10];
-	
 		
 	/*METHODS*/	
 	AccountHolder(
@@ -249,12 +248,22 @@ public class AccountHolder implements Comparable<AccountHolder>
 		return new AccountHolder(tempFirstName, tempMidName, TempLastName, tempSSN);
 	}
 	
+	@Override
+	public int compareTo(AccountHolder obj) 
+	{
+		if(obj == null) return 0;
+		if(this.getCombinedBalance() > obj.getCombinedBalance()) return 1;
+		else if(this.getCombinedBalance() < obj.getCombinedBalance()) return -1;
+		return 0;
+	}
+	
 	String writeToString()
 	{	
 		// Store num of accounts as str to concat into result
 		int tempNumOfChk = this.getNumberOfCheckingAccounts(),
-				   tempNumOFSav = this.getNumberOfSavingsAccounts(),
+				   tempNumOfSav = this.getNumberOfSavingsAccounts(),
 				   tempNumOfCDs = this.getNumberOfCDAccounts();
+		
 		// resulting string to add to
 		String result = getLastName() + "," + getMiddleName() + "," + getFirstName() + "," + getSSN() + "\n" +
 						tempNumOfChk + "\n";
@@ -264,17 +273,17 @@ public class AccountHolder implements Comparable<AccountHolder>
 		{
 			result += this.checkingAccountList[i].writeToString() + "\n";
 		}
-		result += tempNumOFSav + "\n";
+		result += tempNumOfSav + "\n";
 		
 		// loop over savings accounts, run writeToString to return data from class
-		for(int i = 0; i < tempNumOFSav; i++)
+		for(int i = 0; i < tempNumOfSav; i++)
 		{
 			result += this.savingsAccountList[i].writeToString() + "\n";
 		}
 		result += tempNumOfCDs + "\n";
 		
 		// loop over cd accounts, run writeToString to return data from class
-		for(int i = 0; i < tempNumOFSav; i++)
+		for(int i = 0; i < tempNumOfCDs; i++)
 		{
 			result += this.cdAccountList[i].writeToString() + "\n";
 		}
@@ -282,10 +291,5 @@ public class AccountHolder implements Comparable<AccountHolder>
 		return result;
 	}
 	
-	@Override
-	public int compareTo(AccountHolder obj) {
-		if(this.getCombinedBalance() > obj.getCombinedBalance()) return 1;
-		else if(this.getCombinedBalance() < obj.getCombinedBalance()) return -1;
-		return 0;
-	}
+	
 }

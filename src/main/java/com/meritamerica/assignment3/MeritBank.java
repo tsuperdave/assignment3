@@ -93,12 +93,10 @@ public class MeritBank
 		return presentValue * Math.pow((1 + interestRate), term);
 	}
 	
-	// ------------------------------------------------ FINISH ------------------------------------------------------------------//
-	static boolean readFromFile(String accountData) throws ParseException
+	static boolean readFromFile(String accountData)
 	{		
 		try(Scanner sc = new Scanner(new FileReader(accountData)))
-		{	
-			
+		{				
 			setNextAccountNumber(Long.parseLong(sc.next()));										// store next acct num
 			// -- CD OFFERS -- //
 			CDOffering[] newCDarr = new CDOffering[sc.nextInt()];									// set 3 cd offers
@@ -108,9 +106,9 @@ public class MeritBank
 			}
 			setCDOfferings(newCDarr);
 			
-			int newNumOfAcctHolder = Integer.parseInt(sc.next());													// set new num of acct holders
+			AccountHolder[] newList = new AccountHolder[Integer.parseInt(sc.next())];									// set new num of acct holders
 			// -- GET ACCT HOLDER INFO AND ADD --//
-			for(int i = 0; i < newNumOfAcctHolder; i++)
+			for(int i = 0; i < newList.length; i++)
 			{
 				AccountHolder tempAcct = AccountHolder.readFromString(sc.next());					// temp store num of account holders
 				int numOfCheckAccts = sc.nextInt();													// store num of checking accounts
@@ -123,14 +121,19 @@ public class MeritBank
 					{
 						tempAcct.addSavingsAccount(SavingsAccount.readFromString(sc.next()));		// read from str and add obj to Acct Holder
 					}
+					
 				int numOfCDAccts = sc.nextInt();
 					for(int j = 0; j < numOfCDAccts; j++)
 					{
 						tempAcct.addCDAccount(CDAccount.readFromString(sc.next()));					// read from str and add obj to Acct Holder
 					}
 					
-				listOfAccountHolders[i] = tempAcct;													// create new Acct Holder list Array with new values
-			}				
+				newList[i] = tempAcct;													// create new Acct Holder list Array with new values				
+			}	
+			listOfAccountHolders = newList;
+			System.out.println(listOfAccountHolders[0].getNumberOfCDAccounts());
+			System.out.println(listOfAccountHolders[1].getNumberOfCDAccounts());
+			
 		}catch(Exception e)
 		{
 			e.printStackTrace();
@@ -155,18 +158,18 @@ public class MeritBank
 				for(int i = 0; i < listOfAccountHolders.length; i++) 
 				{									
 					bw.write(listOfAccountHolders[i].writeToString()); bw.newLine();
-				}			 								
-		}		
-		catch(IOException e) 
+				}	
+				bw.flush();
+		}catch(Exception e) 
 		{
-			System.out.println("File not found"); 
+			e.printStackTrace();
 		}
-		return true; // what to return ?? file?
+		return true;
 	}
 	
 	static AccountHolder[] sortAccountHolders()
 	{		
-		Arrays.sort(listOfAccountHolders, Collections.reverseOrder());
+		Arrays.sort(listOfAccountHolders);
 		return listOfAccountHolders;											
 	}
 	

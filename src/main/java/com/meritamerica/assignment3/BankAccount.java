@@ -15,36 +15,22 @@ public class BankAccount
 	protected double interestRate;
 	protected double term;
 	
-	BankAccount(double balance, double interestRate)
+	BankAccount(double balance, double interestRate) //
 	{
 		this(MeritBank.getNextAccountNumber(), balance, interestRate, new java.util.Date());	
 	}
 	
-	BankAccount(double balance, double interestRate, java.util.Date accountOpenedOn)
+	BankAccount(double balance, double interestRate, java.util.Date accountOpenedOn) //
 	{
 		this(MeritBank.getNextAccountNumber(), balance, interestRate, accountOpenedOn);
 	}
 	
-	BankAccount(double balance, double interestRate, Date accountOpenedOn, double term)
-	{
-		this(MeritBank.getNextAccountNumber(), balance, interestRate, accountOpenedOn, term);
-	}
-	
-	protected BankAccount(long accountNumber, double balance, double interestRate, java.util.Date accountOpenedOn)
+	BankAccount(long accountNumber, double balance, double interestRate, java.util.Date accountOpenedOn) //
 	{		
 		this.accountNumber = accountNumber;
 		this.balance = balance;
 		this.interestRate = interestRate;
 		this.accountOpenedOn = accountOpenedOn;
-	}
-	
-	protected BankAccount(long accountNumber, double balance, double interestRate, java.util.Date accountOpenedOn, double term)
-	{		
-		this.accountNumber = accountNumber;
-		this.balance = balance;
-		this.interestRate = interestRate;
-		this.accountOpenedOn = accountOpenedOn;
-		this.term = term;
 	}
 	
 	long getAccountNumber(){return this.accountNumber;}
@@ -58,8 +44,8 @@ public class BankAccount
 	java.util.Date getOpenedOn(){return accountOpenedOn;}
 	
 	boolean withdraw(double amount)
-	{
-		if(amount >= balance)
+	{		
+		if(amount > 0 && amount <= getBalance())
 		{
 			this.balance -= amount;
 			return true;
@@ -69,7 +55,7 @@ public class BankAccount
 	
 	boolean deposit (double amount)
 	{
-		if(amount < 0)
+		if(amount > 0)
 		{
 			this.balance += amount;
 			return true;
@@ -77,18 +63,26 @@ public class BankAccount
 		return false;
 	}
 	
-
-	// ------------------------------------------------ FINISH ------------------------------------------------------------------//
 	static BankAccount readFromString(String accountData) throws ParseException
-	{
-		try 
+	{	
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		long tempAcctNum = 0;
+		double tempBal = 0, tempIntRate = 0;
+		Date tempOpenDate = null;
+		String[] tempArr = accountData.split(",");
+		try
 		{
-			
+			/* "1,1000,0.0001,01/01/2020" */
+			tempAcctNum = Long.parseLong(tempArr[0]);
+			tempBal = Double.parseDouble(tempArr[1]);
+			tempIntRate = Double.parseDouble(tempArr[2]);
+			tempOpenDate = dateFormat.parse(tempArr[3]);
+					
 		}catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		return null;
+		return new BankAccount(tempAcctNum, tempBal, tempIntRate, tempOpenDate);
 	}
 	
 	String writeToString()
@@ -96,12 +90,12 @@ public class BankAccount
 		String tempAcctNum = String.valueOf(accountNumber), 
 				tempBalance = String.valueOf(balance), 
 				tempIntRate = String.valueOf(interestRate),
-				tempOpenDate = String.valueOf(accountOpenedOn),
-				tempTerm = String.valueOf(term);
+				tempOpenDate = String.valueOf(accountOpenedOn);
+				//tempTerm = String.valueOf(term);
 		return tempAcctNum + "," +
 		tempBalance + "," +
 		tempIntRate + "," +
-		tempOpenDate + "," +
-		tempTerm;
+		tempOpenDate; //+ "," +
+		//tempTerm;
 	}
 }

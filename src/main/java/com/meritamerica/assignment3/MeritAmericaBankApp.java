@@ -5,9 +5,9 @@ import java.text.*;
 public class MeritAmericaBankApp {
 	public static void main(String[] args) throws ParseException 
 	{
-		// MeritBank.readFromFile("src/test/testMeritBank_good.txt");
+		MeritBank.readFromFile("src/test/testMeritBank_good.txt");
 				
-		MeritBank.readFromFile("src/test/testMeritBank_testing");
+		// MeritBank.readFromFile("src/test/testMeritBank_testing");
 		
 	
 		MeritBank.writeToFile("src/test/writeTestFile");
