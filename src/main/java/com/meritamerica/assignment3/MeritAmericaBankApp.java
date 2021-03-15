@@ -5,12 +5,18 @@ import java.text.*;
 public class MeritAmericaBankApp {
 	public static void main(String[] args) throws ParseException 
 	{
-		MeritBank.readFromFile("src/test/testMeritBank_good.txt");
+		// MeritBank.readFromFile("src/test/testMeritBank_good.txt");
 				
 		// MeritBank.readFromFile("src/test/testMeritBank_testing");
-		
-	
-		MeritBank.writeToFile("src/test/writeTestFile");
+		AccountHolder accountHolder = new AccountHolder(
+	        	"Sadiq",
+	        	"",
+	        	"Manji",
+	        	"123456789");
+	        
+	        SavingsAccount savingsAccount = accountHolder.addSavingsAccount(100);
+	        System.out.println(savingsAccount.futureValue(3));
+		// MeritBank.writeToFile("src/test/writeTestFile");
 				
 		// -------- WEEK 3 TESTS --------- //
 		/*

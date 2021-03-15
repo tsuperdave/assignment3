@@ -19,21 +19,24 @@ public class CheckingAccount extends BankAccount
 	// ------------------------------------------------ FINISH ------------------------------------------------------------------//
 	static CheckingAccount readFromString(String accountData) throws ParseException
 	{
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		long tempAcctNum = 0;
 		double tempBal = 0, tempIntRate = 0;
 		Date tempOpenDate = null;
 		String[] tempArr = accountData.split(",");
-		try
+		if(accountData.length() > 0)
 		{
 			/* "1,1000,0.0001,01/01/2020" */
+			/* "a,1000,0.00015,01/01/2020" */
 			tempAcctNum = Long.parseLong(tempArr[0]);
 			tempBal = Double.parseDouble(tempArr[1]);
 			tempIntRate = Double.parseDouble(tempArr[2]);
-			tempOpenDate = new java.util.Date(tempArr[3]);
+			tempOpenDate = dateFormat.parse((tempArr[3]));
 					
-		}catch(Exception e)
+		}
+		else
 		{
-			e.printStackTrace();
+			throw new NumberFormatException();
 		}
 		return new CheckingAccount(tempAcctNum, tempBal, tempIntRate, tempOpenDate);
 	}

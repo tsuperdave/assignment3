@@ -134,6 +134,7 @@ public class MeritBank
 			System.out.println(listOfAccountHolders[0].getNumberOfCDAccounts());
 			System.out.println(listOfAccountHolders[1].getNumberOfCDAccounts());
 			
+			
 		}catch(Exception e)
 		{
 			e.printStackTrace();

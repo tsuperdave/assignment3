@@ -39,7 +39,10 @@ public class BankAccount
 	
 	double getInterestRate(){return interestRate;}
 	
-	double futureValue(int years){return balance * Math.pow((1 + interestRate), (double)years);}
+	double futureValue(int years)
+	{
+		return getBalance() * Math.pow((1 + getInterestRate()), years);		
+	}
 	
 	java.util.Date getOpenedOn(){return accountOpenedOn;}
 	

@@ -17,21 +17,21 @@ public class CDOffering
 	
 	double getInterestRate(){return interestRate;}
 	
-	static CDOffering readFromString(String accountHolderData) throws NumberFormatException
+	static CDOffering readFromString(String accountHolderData)
 	{
 		int tempTerm = 0;
 		double tempIntRate = 0;
-		try
-		{ 
-			int comma = accountHolderData.indexOf(",");
+		int comma = accountHolderData.indexOf(",");
+		if(comma >= 0)
+		{
 			tempTerm = Integer.parseInt(accountHolderData.substring(0, comma));
 			tempIntRate = Double.parseDouble(accountHolderData.substring(comma + 1, accountHolderData.length()));
-			
-		}catch(Exception e)
+		}else
 		{
-			e.printStackTrace();
-		}		
+			throw new NumberFormatException();
+		}
 		return new CDOffering(tempTerm, tempIntRate);
+		
 	}
 	
 	String writeToString()
