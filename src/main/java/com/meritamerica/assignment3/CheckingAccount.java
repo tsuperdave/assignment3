@@ -34,6 +34,7 @@ public class CheckingAccount extends BankAccount
 		}
 		else
 		{
+			System.out.println("Checking account data format incorrect");
 			throw new NumberFormatException();
 		}
 		return new CheckingAccount(tempAcctNum, tempBal, tempIntRate, tempOpenDate);

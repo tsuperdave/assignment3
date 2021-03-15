@@ -1,10 +1,7 @@
 package com.meritamerica.assignment3;
 
-import java.io.*;
 import java.text.*;
 import java.util.Date;
-
-import com.meritamerica.assignment3.MeritBank;
 
 public class BankAccount 
 {	
@@ -33,18 +30,15 @@ public class BankAccount
 		this.accountOpenedOn = accountOpenedOn;
 	}
 	
-	long getAccountNumber(){return this.accountNumber;}
+	long getAccountNumber(){ return this.accountNumber; }
 	
-	double getBalance(){return balance;}
+	double getBalance(){ return balance; }
 	
-	double getInterestRate(){return interestRate;}
+	double getInterestRate(){ return interestRate; }
 	
-	double futureValue(int years)
-	{
-		return getBalance() * Math.pow((1 + getInterestRate()), years);		
-	}
-	
-	java.util.Date getOpenedOn(){return accountOpenedOn;}
+	double futureValue(int years){ return getBalance() * Math.pow((1 + getInterestRate()), years); }
+
+	java.util.Date getOpenedOn(){ return accountOpenedOn; }
 	
 	boolean withdraw(double amount)
 	{		
@@ -73,17 +67,18 @@ public class BankAccount
 		double tempBal = 0, tempIntRate = 0;
 		Date tempOpenDate = null;
 		String[] tempArr = accountData.split(",");
-		try
+		if(accountData.length() > 0)
 		{
 			/* "1,1000,0.0001,01/01/2020" */
 			tempAcctNum = Long.parseLong(tempArr[0]);
 			tempBal = Double.parseDouble(tempArr[1]);
 			tempIntRate = Double.parseDouble(tempArr[2]);
-			tempOpenDate = dateFormat.parse(tempArr[3]);
-					
-		}catch(Exception e)
+			tempOpenDate = dateFormat.parse(tempArr[3]);					
+		}
+		else
 		{
-			e.printStackTrace();
+			System.out.println("Data from bank account incorrect");
+			throw new NumberFormatException();			
 		}
 		return new BankAccount(tempAcctNum, tempBal, tempIntRate, tempOpenDate);
 	}

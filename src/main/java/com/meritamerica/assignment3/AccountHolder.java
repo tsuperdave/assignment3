@@ -40,19 +40,19 @@ public class AccountHolder implements Comparable<AccountHolder>
 	}
 		
 	/* GETTERS/SETTERS */
-	String getFirstName(){return firstName;}
-	void setFirstName(String firstName){this.firstName = firstName;}
+	String getFirstName(){ return firstName; }
+	void setFirstName(String firstName){ this.firstName = firstName; }
 	
 	String getMiddleName(){return middleName;}
-	void setMiddleName(String middleName){this.middleName = middleName;}
+	void setMiddleName(String middleName){ this.middleName = middleName; }
 	
-	String getLastName(){return lastName;}
-	void setLastName(String lastName){this.lastName = lastName;}
+	String getLastName(){ return lastName; }
+	void setLastName(String lastName){ this.lastName = lastName; }
 	
-	String getSSN(){return ssn;}
-	void setSSN(String ssn){this.ssn = ssn;}
+	String getSSN(){ return ssn; }
+	void setSSN(String ssn){ this.ssn = ssn; }
 	
-	double getCombinedBalance(){return getCheckingBalance() + getSavingsBalance() + getCDBalance();}
+	double getCombinedBalance(){ return getCheckingBalance() + getSavingsBalance() + getCDBalance(); }
 	
 	/* CHECKING ACCOUNT */
 	CheckingAccount addCheckingAccount(double openingBalance)
@@ -229,31 +229,34 @@ public class AccountHolder implements Comparable<AccountHolder>
 		}
 		return sum;
 	}
-	// ------------------------------------------------ FINISH ------------------------------------------------------------------//
-	static AccountHolder readFromString(String accountHolderData) throws ParseException
+
+	static AccountHolder readFromString(String accountHolderData) throws Exception
 	{
 		String tempFirstName = "", tempMidName = "", TempLastName = "", tempSSN = "";
 		String[] tempArr = accountHolderData.split(",");
-		try
+		if(accountHolderData.length() > 0)
 		{
 			 /* "Doe,,John,1234567890" */
 			 tempFirstName = tempArr[0];
 			 tempMidName = tempArr[1];
 			 TempLastName = tempArr[2];
 			 tempSSN = tempArr[3];
-		}catch(Exception e)
+		}
+		else
 		{
-			e.printStackTrace();
+			System.out.println("Account Holder data format incorrect");
+			throw new Exception();
 		}
 		return new AccountHolder(tempFirstName, tempMidName, TempLastName, tempSSN);
 	}
 	
 	@Override
-	public int compareTo(AccountHolder obj) 
+	public int compareTo(AccountHolder otherAccountHolder) 
 	{
-		if(obj == null) return 0;
-		if(this.getCombinedBalance() > obj.getCombinedBalance()) return 1;
-		else if(this.getCombinedBalance() < obj.getCombinedBalance()) return -1;
+		// --- compare combined balances of obj passed in to current instance of obj -- //
+		if(otherAccountHolder == null) return 0;
+		if(this.getCombinedBalance() > otherAccountHolder.getCombinedBalance()) return 1;
+		else if(this.getCombinedBalance() < otherAccountHolder.getCombinedBalance()) return -1;
 		return 0;
 	}
 	

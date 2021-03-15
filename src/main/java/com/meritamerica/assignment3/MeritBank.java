@@ -1,12 +1,10 @@
 package com.meritamerica.assignment3;
 
 import java.io.*;
-import java.text.*;
 import java.util.*;
 
 public class MeritBank 
 {
-	// private static final String FILE_NAME = "src/test/testMeritBank_testing";
 	private static CDOffering[] listOfCDOffers;
 	private static AccountHolder[] listOfAccountHolders;
 	private static long nextAccountNumber = 0;
@@ -23,9 +21,9 @@ public class MeritBank
 		}
 	}
 	
-	static AccountHolder[] getAccountHolders(){return listOfAccountHolders;}
+	static AccountHolder[] getAccountHolders(){ return listOfAccountHolders; }
 	
-	static CDOffering[] getCDOfferings(){return listOfCDOffers;}
+	static CDOffering[] getCDOfferings(){ return listOfCDOffers; }
 	
 	static CDOffering getBestCDOffering(double depositAmount)
 	{	
@@ -67,11 +65,11 @@ public class MeritBank
 		return listOfCDOffers[indexSecondBiggest];
 	}
 	
-	static void clearCDOfferings(){listOfCDOffers = null;}
+	static void clearCDOfferings(){ listOfCDOffers = null; }
 	
-	static void setCDOfferings(CDOffering[] offerings){listOfCDOffers = offerings;}
+	static void setCDOfferings(CDOffering[] offerings){ listOfCDOffers = offerings; }
 	
-	static long getNextAccountNumber(){return nextAccountNumber++;}
+	static long getNextAccountNumber(){ return nextAccountNumber++; }
 	
 	static double totalBalances()
 	{
@@ -91,9 +89,9 @@ public class MeritBank
 		return presentValue * Math.pow((1 + interestRate), term);
 	}
 	
-	static boolean readFromFile(String accountData)
+	static boolean readFromFile(String fileName)
 	{		
-		try(Scanner sc = new Scanner(new FileReader(accountData)))
+		try(Scanner sc = new Scanner(new FileReader(fileName)))
 		{				
 			setNextAccountNumber(Long.parseLong(sc.next()));										// store next acct num
 			// -- CD OFFERS -- //
@@ -185,6 +183,6 @@ public class MeritBank
 		return listOfAccountHolders;											
 	}
 	
-	private static void setNextAccountNumber(long nextAccountNumber){MeritBank.nextAccountNumber = nextAccountNumber;}
+	private static void setNextAccountNumber(long nextAccountNumber){ MeritBank.nextAccountNumber = nextAccountNumber; }
 
 }

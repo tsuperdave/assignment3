@@ -31,6 +31,7 @@ public class SavingsAccount extends BankAccount
 		}
 		else
 		{
+			System.out.println("Savings account data format incorrect");
 			throw new NumberFormatException();
 		}
 		return new SavingsAccount(tempAcctNum, tempBal, tempIntRate, tempOpenDate);

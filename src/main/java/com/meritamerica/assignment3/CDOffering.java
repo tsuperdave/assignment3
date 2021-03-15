@@ -1,7 +1,5 @@
 package com.meritamerica.assignment3;
 
-import java.text.*;
-
 public class CDOffering 
 {
 	private int term;
@@ -13,30 +11,27 @@ public class CDOffering
 		this.interestRate = interestRate;
 	}
 	
-	int getTerm(){return term;}
+	int getTerm(){ return term; }
 	
-	double getInterestRate(){return interestRate;}
+	double getInterestRate(){ return interestRate; }
 	
-	static CDOffering readFromString(String accountHolderData)
+	static CDOffering readFromString(String cdOfferingDataString)
 	{
 		int tempTerm = 0;
 		double tempIntRate = 0;
-		int comma = accountHolderData.indexOf(",");
+		int comma = cdOfferingDataString.indexOf(",");
 		if(comma >= 0)
 		{
-			tempTerm = Integer.parseInt(accountHolderData.substring(0, comma));
-			tempIntRate = Double.parseDouble(accountHolderData.substring(comma + 1, accountHolderData.length()));
+			tempTerm = Integer.parseInt(cdOfferingDataString.substring(0, comma));
+			tempIntRate = Double.parseDouble(cdOfferingDataString.substring(comma + 1, cdOfferingDataString.length()));
 		}else
 		{
+			System.out.println("CD Offering data format incorrect");
 			throw new NumberFormatException();
 		}
-		return new CDOffering(tempTerm, tempIntRate);
-		
+		return new CDOffering(tempTerm, tempIntRate);		
 	}
 	
-	String writeToString()
-	{	
-		return String.valueOf(this.term) + "," + String.valueOf(this.interestRate);
-	}
+	String writeToString(){	return String.valueOf(this.term) + "," + interestRate; }
 
 }

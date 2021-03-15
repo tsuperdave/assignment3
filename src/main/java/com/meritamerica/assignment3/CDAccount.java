@@ -22,28 +22,31 @@ public class CDAccount extends BankAccount
 		this.term = term;
 	}
 	
-	int getTerm(){return this.term;}
+	int getTerm(){ return this.term; }
 	
 	@Override
 	boolean withdraw(double amount)
 	{
+		// --- if withdraw amt is less than == bal and greater than 0 AND if term has been reached vs openDate, true --- //
 		if(amount <= getBalance()  && amount > 0 && new Date().getYear() > getOpenedOn().getYear() + getTerm())
 		{
 			this.balance -= amount;
 			return true;
 		}
-		System.out.println("Cannot withdraw");
+		System.out.println("Cannot withdraw. Check balance or ensure term has been reached");
 		return false;		
 	}
 	
 	@Override
 	boolean deposit (double amount)
 	{
+		// --- deposit amount has to be above 0 and the open date has reached term --- //
 		if(amount > 0 && new Date().getYear() > getOpenedOn().getYear() + getTerm())
 		{
 			this.balance += amount;
 			return true;
 		}
+		System.out.println("Cannot deposit. Check balance or ensure term has been reached");
 		return false;		
 	}	
 	
