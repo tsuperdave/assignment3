@@ -49,7 +49,7 @@ public class CDAccount extends BankAccount
 	
 	double futureValue()
 	{
-		return 0;
+		return getBalance() * Math.pow((1 + getInterestRate()), term);
 	}
 	
 	static CDAccount readFromString(String accountData) throws ParseException
@@ -60,18 +60,18 @@ public class CDAccount extends BankAccount
 		int tempTerm = 0;
 		Date tempOpenDate = null;
 		String[] tempArr = accountData.split(",");
-		try
+		if(accountData.length() > 0)
 		{
 			/* "9,5000,0.02,01/01/2020,5" */
 			tempAcctNum = Long.parseLong(tempArr[0]);
 			tempBal = Double.parseDouble(tempArr[1]);
 			tempIntRate = Double.parseDouble(tempArr[2]);
 			tempOpenDate = dateFormat.parse(tempArr[3]);
-			tempTerm = Integer.parseInt(tempArr[4]);
-					
-		}catch(Exception e)
+			tempTerm = Integer.parseInt(tempArr[4]);					
+		}
+		else
 		{
-			e.printStackTrace();
+			throw new NumberFormatException();
 		}
 		return new CDAccount(tempAcctNum, tempBal, tempIntRate, tempOpenDate, tempTerm);
 	}

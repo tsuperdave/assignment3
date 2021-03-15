@@ -1,18 +1,12 @@
 package com.meritamerica.assignment3;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.text.*;
 import java.util.*;
 
-import com.meritamerica.assignment3.BankAccount;
-
 public class SavingsAccount extends BankAccount
 {
-	SavingsAccount(double openingBalance)
-	{
-		super(openingBalance, 0.001);		
-	}
+		
+	SavingsAccount(double openingBalance){super(openingBalance, 0.01);		}
 	
 	SavingsAccount(long accountNumber, double balance, double interestRate, java.util.Date accountOpenedOn)
 	{
@@ -29,6 +23,7 @@ public class SavingsAccount extends BankAccount
 		if(accountData.length() > 0)
 		{
 			/* "1,1000,0.0001,01/01/2020" */
+			/* "a,1000,0.00015,01/01/2020" */
 			tempAcctNum = Long.parseLong(tempArr[0]);
 			tempBal = Double.parseDouble(tempArr[1]);
 			tempIntRate = Double.parseDouble(tempArr[2]);

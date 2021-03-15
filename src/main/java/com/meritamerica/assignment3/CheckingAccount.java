@@ -16,7 +16,6 @@ public class CheckingAccount extends BankAccount
 		super(accountNumber, balance, interestRate, accountOpenedOn);	
 	}
 	
-	// ------------------------------------------------ FINISH ------------------------------------------------------------------//
 	static CheckingAccount readFromString(String accountData) throws ParseException
 	{
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -31,8 +30,7 @@ public class CheckingAccount extends BankAccount
 			tempAcctNum = Long.parseLong(tempArr[0]);
 			tempBal = Double.parseDouble(tempArr[1]);
 			tempIntRate = Double.parseDouble(tempArr[2]);
-			tempOpenDate = dateFormat.parse((tempArr[3]));
-					
+			tempOpenDate = dateFormat.parse((tempArr[3]));					
 		}
 		else
 		{

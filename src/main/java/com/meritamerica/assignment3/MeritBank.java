@@ -4,8 +4,6 @@ import java.io.*;
 import java.text.*;
 import java.util.*;
 
-/* Fix error with first and 2nd best CD val, add combined bals and next Acct num */
-
 public class MeritBank 
 {
 	// private static final String FILE_NAME = "src/test/testMeritBank_testing";
@@ -130,14 +128,14 @@ public class MeritBank
 					
 				newList[i] = tempAcct;													// create new Acct Holder list Array with new values				
 			}	
-			listOfAccountHolders = newList;
-			System.out.println(listOfAccountHolders[0].getNumberOfCDAccounts());
-			System.out.println(listOfAccountHolders[1].getNumberOfCDAccounts());
+			listOfAccountHolders = newList;	
 			
+			sortAccountHolders();
 			
 		}catch(Exception e)
 		{
 			e.printStackTrace();
+			return false;
 		}		
 		return true;
 	}
@@ -169,8 +167,21 @@ public class MeritBank
 	}
 	
 	static AccountHolder[] sortAccountHolders()
-	{		
+	{	
+		// --- Sort list of accountHolders by balance and display in output --- //
 		Arrays.sort(listOfAccountHolders);
+		
+		for(int i = 0; i < listOfAccountHolders.length; i++)
+		{
+			System.out.println(listOfAccountHolders[i].getLastName() + "," 
+					+ listOfAccountHolders[i].getMiddleName() + "," 
+					+ listOfAccountHolders[i].getFirstName() + ","
+					+ listOfAccountHolders[i].getSSN() + "\n" +
+					" has a combined accounts balance of " +
+					listOfAccountHolders[i].getCombinedBalance());
+		}
+			
+		
 		return listOfAccountHolders;											
 	}
 	
